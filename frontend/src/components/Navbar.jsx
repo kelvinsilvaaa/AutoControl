@@ -3,19 +3,44 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Navbar() {
   const navigate = useNavigate();
-  const usuario = JSON.parse(localStorage.getItem('usuario'));
+
+  const carregarUsuario = () => {
+    const usuarioSalvo = localStorage.getItem('usuario');
+
+    if (!usuarioSalvo || usuarioSalvo === 'undefined') {
+      return null;
+    }
+
+    try {
+      return JSON.parse(usuarioSalvo);
+    } catch (error) {
+      console.error('Usuário inválido no localStorage:', error);
+      localStorage.removeItem('usuario');
+      return null;
+    }
+  };
+
+  const usuario = carregarUsuario();
+
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('usuario');
-    navigate('/login');
+    const { token, usuario } = response.data;
+
+    if (!token || !usuario) {
+      throw new Error('Resposta de login incompleta');
+    }
+
+    localStorage.setItem('token', token);
+    localStorage.setItem('usuario', JSON.stringify(usuario));
+
+    navigate('/dashboard');
   };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark">
       <div className="container">
         <a className="navbar-brand" href="/">
-          🚗 AutoControl
+          AutoControl
         </a>
         <button
           className="navbar-toggler"

@@ -64,10 +64,6 @@ export default function Login() {
             {carregando ? 'Entrando...' : 'Entrar'}
           </button>
         </form>
-
-        <div className="mt-3 text-center">
-          <small>Credenciais de teste: admin / 123456</small>
-        </div>
       </div>
     </div>
   );

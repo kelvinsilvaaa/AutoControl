@@ -2,6 +2,8 @@ package com.autocontrol.backend.service;
 
 import com.autocontrol.backend.model.Usuario;
 import com.autocontrol.backend.repository.UsuarioRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
@@ -13,6 +15,9 @@ import java.util.Collections;
 
 @Service
 public class UsuarioService implements UserDetailsService {
+
+    private static final Logger log =
+            LoggerFactory.getLogger(UsuarioService.class);
 
     private final UsuarioRepository usuarioRepository;
     private final PasswordEncoder passwordEncoder;
@@ -40,21 +45,21 @@ public class UsuarioService implements UserDetailsService {
     }
 
     public boolean validarCredenciais(String username, String password) {
+        log.debug("Validando credenciais do usuario:{}", username);
+
         Optional<Usuario> usuario = buscarPorUsername(username);
 
-        System.out.println("Usuário encontrado: " + usuario.isPresent());
-
-        if (usuario.isPresent()) {
-            System.out.println("Senha digitada: " + password);
-            System.out.println("Hash banco: " + usuario.get().getPassword());
-
-            boolean ok = passwordEncoder.matches(password, usuario.get().getPassword());
-            System.out.println("Senha válida: " + ok);
-
-            return ok;
+        if (usuario.isEmpty()) {
+            log.warn("Falha de autenticação: usuário não encontrado: {}", username);
+            return false;
         }
 
-        return false;
+        boolean senhaValida = passwordEncoder.matches(password, usuario.get().getPassword());
+        if (!senhaValida) {
+            log.warn("Falha de autenticação: senha invalida: {}", username);
+        }
+
+        return senhaValida;
     }
 
     @Override
@@ -71,4 +76,5 @@ public class UsuarioService implements UserDetailsService {
                 .authorities(Collections.emptyList())
                 .build();
     }
+
 }

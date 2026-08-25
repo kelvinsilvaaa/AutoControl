@@ -11,7 +11,8 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = "http://localhost:5173")
+//@CrossOrigin(origins = "http://localhost:5173")
+
 public class AuthController {
 
     private final UsuarioService usuarioService;
@@ -26,12 +27,6 @@ public class AuthController {
     public ResponseEntity<?> login(@RequestBody Map<String, String> request) {
         String username = request.get("username");
         String password = request.get("password");
-
-
-        System.out.println("USER: " + username);
-        System.out.println("PASS: " + password);
-        System.out.println("DB USER: " + usuarioService.buscarPorUsername(username));
-
 
         if (usuarioService.validarCredenciais(username, password)) {
             String token = jwtUtils.generateToken(username);
