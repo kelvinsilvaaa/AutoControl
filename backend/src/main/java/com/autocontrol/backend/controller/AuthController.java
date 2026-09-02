@@ -1,5 +1,7 @@
 package com.autocontrol.backend.controller;
 
+import com.autocontrol.backend.dto.LoginRequestDTO;
+import com.autocontrol.backend.dto.LoginResponseDTO;
 import com.autocontrol.backend.model.Usuario;
 import com.autocontrol.backend.security.JwtUtils;
 import com.autocontrol.backend.service.UsuarioService;
@@ -11,7 +13,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/auth")
-//@CrossOrigin(origins = "http://localhost:5173")
 
 public class AuthController {
 
@@ -24,18 +25,22 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Map<String, String> request) {
-        String username = request.get("username");
-        String password = request.get("password");
+    public ResponseEntity<?> login(@RequestBody LoginRequestDTO request) {
+        String username = request.username();
+        String password = request.password();
 
         if (usuarioService.validarCredenciais(username, password)) {
             String token = jwtUtils.generateToken(username);
             Optional<Usuario> usuario = usuarioService.buscarPorUsername(username);
 
-            Map<String, Object> response = new HashMap<>();
-            response.put("token", token);
-            response.put("usuario", usuario.get());
+            Usuario usuarioEncontrado = usuario.get();
 
+            LoginResponseDTO response = new LoginResponseDTO(
+                    usuarioEncontrado.getId(),
+                    usuarioEncontrado.getUsername(),
+                    usuarioEncontrado.getNome(),
+                    token
+            );
             return ResponseEntity.ok(response);
         }
 

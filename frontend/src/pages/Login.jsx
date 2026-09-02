@@ -17,8 +17,16 @@ export default function Login() {
 
     try {
       const response = await authAPI.login(username, password);
+
+      const usuario = {
+        id: response.data.id,
+        username: response.data.username,
+        nome: response.data.nome
+      };
+
       localStorage.setItem('token', response.data.token);
-      localStorage.setItem('usuario', JSON.stringify(response.data.usuario));
+      localStorage.setItem('usuario', JSON.stringify(usuario));
+
       navigate('/dashboard');
     } catch (err) {
       setErro('Usuário ou senha incorretos');

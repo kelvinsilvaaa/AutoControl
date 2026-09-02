@@ -50,7 +50,7 @@ public class UsuarioService implements UserDetailsService {
         Optional<Usuario> usuario = buscarPorUsername(username);
 
         if (usuario.isEmpty()) {
-            log.warn("Falha de autenticação: usuário não encontrado: {}", username);
+           log.warn("Falha de autenticação: usuário não encontrado: {}", username);
             return false;
         }
 
@@ -58,6 +58,7 @@ public class UsuarioService implements UserDetailsService {
         if (!senhaValida) {
             log.warn("Falha de autenticação: senha invalida: {}", username);
         }
+
 
         return senhaValida;
     }
