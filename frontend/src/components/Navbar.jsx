@@ -24,16 +24,9 @@ export default function Navbar() {
 
 
   const handleLogout = () => {
-    const { token, usuario } = response.data;
-
-    if (!token || !usuario) {
-      throw new Error('Resposta de login incompleta');
-    }
-
-    localStorage.setItem('token', token);
-    localStorage.setItem('usuario', JSON.stringify(usuario));
-
-    navigate('/dashboard');
+    localStorage.removeItem('token');
+    localStorage.removeItem('usuario');
+    navigate('/login');
   };
 
   return (
