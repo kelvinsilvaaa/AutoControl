@@ -1,5 +1,7 @@
 package com.autocontrol.backend.service;
 
+import com.autocontrol.backend.dto.VeiculoResponseDTO;
+
 import com.autocontrol.backend.model.Veiculo;
 import com.autocontrol.backend.repository.VeiculoRepository;
 import org.springframework.stereotype.Service;
@@ -27,8 +29,19 @@ public class VeiculoService {
         return veiculoRepository.findByUsuarioId(usuarioId);
     }
 
-    public List<Veiculo> listarTodos() {
-        return veiculoRepository.findAll();
+    public List<VeiculoResponseDTO> listarTodos() {
+        return veiculoRepository.findAll()
+                .stream()
+                .map(veiculo -> new VeiculoResponseDTO(
+                        veiculo.getId(),
+                        veiculo.getPlaca(),
+                        veiculo.getMarca(),
+                        veiculo.getModelo(),
+                        veiculo.getAno(),
+                        veiculo.getCor(),
+                        veiculo.getQuilometragem()
+                ))
+                .toList();
     }
 
     public void deletar(Long id) {

@@ -1,5 +1,6 @@
 package com.autocontrol.backend.controller;
 
+import com.autocontrol.backend.dto.VeiculoResponseDTO;
 import com.autocontrol.backend.model.Manutencao;
 import com.autocontrol.backend.model.Abastecimento;
 import com.autocontrol.backend.model.Veiculo;
@@ -32,7 +33,7 @@ public class DashboardController {
     public ResponseEntity<Map<String, Object>> obterEstatisticas() {
         Map<String, Object> stats = new HashMap<>();
 
-        List<Veiculo> veiculos = veiculoService.listarTodos();
+        List<VeiculoResponseDTO> veiculos = veiculoService.listarTodos();
         List<Manutencao> manutencoes = manutencaoService.listarTodas();
         List<Abastecimento> abastecimentos = abastecimentoService.listarTodos();
 

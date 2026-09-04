@@ -1,5 +1,6 @@
 package com.autocontrol.backend.controller;
 
+import com.autocontrol.backend.dto.VeiculoResponseDTO;
 import com.autocontrol.backend.model.Veiculo;
 import com.autocontrol.backend.service.VeiculoService;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class VeiculoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Veiculo>> listarTodos() {
+    public ResponseEntity<List<VeiculoResponseDTO>> listarTodos() {
         return ResponseEntity.ok(veiculoService.listarTodos());
     }
 
