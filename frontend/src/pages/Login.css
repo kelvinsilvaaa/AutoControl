@@ -1,9 +1,16 @@
+
 .login-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #4361EE 0%, #F72585 100%);
+
+  /* Apenas mudamos as cores */
+  background: linear-gradient(
+          135deg,
+          #0B6A59 0%,
+          #0F8B78 100%
+  );
 }
 
 .login-box {
@@ -17,7 +24,7 @@
 
 .login-box h1 {
   text-align: center;
-  color: #4361EE;
+  color: #0B6A59;
   margin-bottom: 10px;
   font-weight: 700;
 }
@@ -36,12 +43,16 @@
 }
 
 .login-box .form-control:focus {
-  border-color: #4361EE;
-  box-shadow: 0 0 0 0.2rem rgba(67, 97, 238, 0.25);
+  border-color: #0B6A59;
+  box-shadow: 0 0 0 0.2rem rgba(11, 106, 89, 0.25);
 }
 
 .login-box .btn-primary {
-  background: linear-gradient(135deg, #4361EE 0%, #F72585 100%);
+  background: linear-gradient(
+          135deg,
+          #0B6A59 0%,
+          #0F8B78 100%
+  );
   border: none;
   padding: 10px;
   font-weight: 600;
@@ -49,5 +60,10 @@
 }
 
 .login-box .btn-primary:hover {
-  background: linear-gradient(135deg, #3a52d5 0%, #e01f75 100%);
+  background: linear-gradient(
+          135deg,
+          #084C40 0%,
+          #0B6A59 100%
+  );
 }
+

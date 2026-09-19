@@ -1,6 +1,6 @@
 :root {
-  --primary-color: #4361EE;
-  --secondary-color: #F72585;
+  --primary-color: #0b6a59;
+  --secondary-color: #0b6a59;
   --success-color: #28A745;
   --danger-color: #DC3545;
   --warning-color: #FFC107;
@@ -8,6 +8,7 @@
   --light-color: #F8F9FA;
   --dark-color: #212529;
 }
+
 
 * {
   margin: 0;
@@ -37,8 +38,8 @@ body {
 }
 
 .btn-primary:hover {
-  background-color: #3a52d5;
-  border-color: #3a52d5;
+  background-color: #696eb8;
+  border-color: #252b60;
 }
 
 .card {

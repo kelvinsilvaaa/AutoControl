@@ -38,7 +38,7 @@ export default function Dashboard() {
         parseFloat(stats?.gastoManutencao || 0),
         parseFloat(stats?.gastoAbastecimento || 0),
       ],
-      backgroundColor: ['#4361EE', '#F72585'],
+      backgroundColor: ['#a39e38', '#1a4681'],
     }],
   };
 
